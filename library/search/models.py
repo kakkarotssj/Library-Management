@@ -64,7 +64,7 @@ class Book(models.Model):
     isbn_no      = models.PositiveIntegerField(unique=True)
     avail_status = models.CharField(max_length=120)
     shelf_no     = models.CharField(max_length=120, unique=True)
-    total_issues = models.PositiveSmallIntegerField()
+    total_issues = models.PositiveSmallIntegerField(default=0)
 
     def __unicode__(self):
         return '{} {} {}'.format(self.book_id.title, self.avail_status, self.shelf_no)

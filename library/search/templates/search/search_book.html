@@ -18,12 +18,19 @@
         </select>
         <button type="submit">Submit</button>
     </form>
-    {% for book in books_list %}
-    <li>
-        {% if book.books_count > 0 %}
-        <a href="search/{{ book.title }}">{{ book.title }}</a> &nbsp;&nbsp;&nbsp; {{ book.author }} &nbsp;&nbsp;&nbsp; {{ book.books_count }} &nbsp;&nbsp;&nbsp; {{ book.category }} {% endif %}
-    </li>
-    {% endfor %}
+    {% if books_list %}
+
+        {% for book in books_list %}
+            <li>
+                {% if book.books_count > 0 %}
+                    <a href="{{ book.id }}">{{ book.title }}</a>        &nbsp;&nbsp;&nbsp;
+                        {{ book.author }}                               &nbsp;&nbsp;&nbsp;
+                        {{ book.books_count }}                          &nbsp;&nbsp;&nbsp;
+                        {{ book.category }} 
+                {% endif %}
+            </li>
+        {% endfor %}
+    {% endif %}
 </body>
 
 </html>

@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from .models import BookDetail
+from .models import BookDetail, Book
 from difflib import SequenceMatcher
 
 # Create your views here.
@@ -40,3 +40,15 @@ def search_books(request):
 #             print "SUCCESS"
         
 #     return render(request, 'search/search_book.html', context)
+
+
+def list_books(request, book_id):
+    context = {}
+
+    book_detail = BookDetail.objects.get(id=book_id)
+    context['book_detail'] = book_detail
+
+    books = Book.objects.filter(book_id=book_id)
+    context['book'] = books
+
+    return render(request, 'search/list_books.html', context)
