@@ -20,7 +20,8 @@
     </form>
     {% for book in books_list %}
     <li>
-        {{ book }}
+        {% if book.books_count > 0 %}
+        <a href="search/{{ book.title }}">{{ book.title }}</a> &nbsp;&nbsp;&nbsp; {{ book.author }} &nbsp;&nbsp;&nbsp; {{ book.books_count }} &nbsp;&nbsp;&nbsp; {{ book.category }} {% endif %}
     </li>
     {% endfor %}
 </body>
