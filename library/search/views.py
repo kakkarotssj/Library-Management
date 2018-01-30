@@ -30,17 +30,6 @@ def search_books(request):
 
     return render(request, 'search/search_book.html', context)
 
-# def search_books(request):
-#     context = {}
-
-#     if request.method == 'POST':
-#         books = Book.objects.all()
-#         temp = request.POST.get('search_by', False)
-#         if temp in ['title', 'author', 'avail_status']:
-#             print "SUCCESS"
-        
-#     return render(request, 'search/search_book.html', context)
-
 
 def list_books(request, book_id):
     context = {}
@@ -49,6 +38,6 @@ def list_books(request, book_id):
     context['book_detail'] = book_detail
 
     books = Book.objects.filter(book_id=book_id)
-    context['book'] = books
+    context['books'] = books
 
     return render(request, 'search/list_books.html', context)

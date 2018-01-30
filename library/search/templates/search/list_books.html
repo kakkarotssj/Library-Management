@@ -7,11 +7,11 @@
 </head>
 
 <body>
-    {% if book %}
-    	{% for book in book %} 
-    		{{ book_detail.title }} &nbsp;&nbsp;&nbsp;
-    		{{ book.avail_status }} &nbsp;&nbsp;&nbsp;
-    		{{ book.shelf_no }} <br />
+    {% if books %}
+    	{% for book in books %} 
+    		{{ book_detail.title }} 		&nbsp;&nbsp;&nbsp;
+    		{{ book.avail_status }} 		&nbsp;&nbsp;&nbsp;
+    		{{ book.shelf_no }} 			<br />
     	{% endfor %}
     {% endif %}
 </body>

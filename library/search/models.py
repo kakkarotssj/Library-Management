@@ -13,9 +13,9 @@ class Student(models.Model):
     password           = models.CharField(max_length=120)
     contact_no         = models.BigIntegerField(unique=True)
     user_id            = models.CharField(max_length=120, unique=True)
+    branch             = models.CharField(max_length=120)
     books_issued_count = models.PositiveSmallIntegerField(default=0)
     total_fine         = models.PositiveSmallIntegerField(default=0)
-    branch             = models.CharField(max_length=120)
 
     def __unicode__(self):
         return '{} {} {} {} {}'.format(self.first_name, self.last_name, self.user_id, self.branch, self.books_issued_count)
