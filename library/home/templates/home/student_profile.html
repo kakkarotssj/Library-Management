@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Student Profile</title>
+</head>
+
+<body>
+	{% if login_status %}
+		<h3>Login Successfull</h3>
+
+		<a href="/logout">Logout</a>
+	{% else %}
+		<a href="/login">Login</a>
+	{% endif %}
+</body>
+
+</html>
