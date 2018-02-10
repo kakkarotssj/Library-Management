@@ -6,25 +6,35 @@
 </head>
 
 <body>
-	<h3>SIGNUP SUCCESSFULL</h3>
 	<br /><br />
 	<hr>
-	<h3>Now you can login.</h3>
 
 	<form method="POST">
 		{% csrf_token %}
 		
-		User Id 		 <input type="text" name="user_id"> 				<br /><br />
-		Password		 <input type="Password" name="password">			<br /><br />
+		<!-- User Id 		 <input type="text" name="user_id"> 				<br /><br />
+		Password		 <input type="Password" name="password">			<br /><br /> -->
 
-		<button type="submit">Submit</button>
+		{{ login_form.as_p }}
+
+		{% if not error %}
+			<button type="submit">Submit</button>	
+		{% endif %}
 	</form>
 
 	{% if error %}
 
 		{{ error }}
+		<br /><br />
+		<a href="/signup">Signup</a>	<br />
+		<a href="/login">Login</a>
 
 	{% endif %}
+
+	<p id="copyright">
+        @2017 Siddharth Sharma &copy
+    </p>
+    
 </body>
 
 </html>

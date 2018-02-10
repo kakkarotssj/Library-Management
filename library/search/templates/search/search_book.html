@@ -7,30 +7,25 @@
 </head>
 
 <body>
+
     <h3>SEARCH</h3>
+    
     <form method="POST">
         {% csrf_token %}
-        <input type="text" name="search_field">
+        {{ search_form.as_p }}
+        <!-- <input type="text" name="search_field">
         <select name="search_by">
                 <option selected="selected" value="title">Title</option>
                 <option value="author">Author</option>
                 <option value="category">Category</option>
-        </select>
+        </select> -->
         <button type="submit">Submit</button>
     </form>
-    {% if books_list %}
 
-        {% for book in books_list %}
-            <li>
-                {% if book.books_count > 0 %}
-                    <a href="{{ book.id }}">{{ book.title }}</a>        &nbsp;&nbsp;&nbsp;
-                        {{ book.author }}                               &nbsp;&nbsp;&nbsp;
-                        {{ book.books_count }}                          &nbsp;&nbsp;&nbsp;
-                        {{ book.category }} 
-                {% endif %}
-            </li>
-        {% endfor %}
-    {% endif %}
+    <p id="copyright">
+        @2017 Siddharth Sharma &copy
+    </p>
+    
 </body>
 
 </html>

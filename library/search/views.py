@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from .models import BookDetail, Book
-from difflib import SequenceMatcher
+from .forms import SearchForm
 
 # Create your views here.
 
@@ -25,8 +25,12 @@ def search_books(request):
             search_by += "__contains" 
             books_list = BookDetail.objects.filter(**{search_by: search_field})
             context['books_list'] = books_list
+            return render(request, 'search/show_list.html', context)
         except UnboundLocalError:
             pass
+    else:
+        search_form = SearchForm()
+        context['search_form'] = search_form
 
     return render(request, 'search/search_book.html', context)
 

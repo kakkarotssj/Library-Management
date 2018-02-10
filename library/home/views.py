@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from search.models import Student
 from django.http import HttpResponseRedirect, HttpResponse
+from .forms import LoginForm, SignupForm
 
 # Create your views here.
 
@@ -25,22 +26,25 @@ def signup(request):
 			for field_name, field_value in request.POST.iteritems():
 				student_signup[field_name] = field_value
 
-			if student_signup['password'] != student_signup['confirm']:
+			if student_signup['password'] != student_signup['confirm_password']:
 				context['password_error'] = "Passwords didn't match. Try again"
 				return render(request, 'home/signup.html', context)
 			
 			signup_status = register_student(student_signup)
-			context['signup_status'] = signup_status
 			if signup_status == "Registration Failed for some reason. Try again":
+				context['signup_failed'] = signup_status
 				return render(request, 'home/signup.html', context)
-			
-			return HttpResponseRedirect('/login')
-
+			else:
+				context['signup_success'] = signup_status
+				return HttpResponseRedirect('/login')
+				
 		except UnboundLocalError:
-			pass
+			return render(request, 'home/signup.html', context)
 
-	return render(request, 'home/signup.html', context)
-
+	else:
+		singup_form = SignupForm()
+		context["singup_form"] = SignupForm
+		return render(request, 'home/signup.html', context)
 
 
 def register_student(student_signup):
@@ -50,7 +54,7 @@ def register_student(student_signup):
 			last_name  = student_signup['last_name'],
 			user_id    = student_signup['user_id'],
 			email_id   = student_signup['email_id'],
-			contact_no = student_signup['contact'],
+			contact_no = student_signup['contact_no'],
 			branch     = student_signup['branch'],
 			password   = student_signup['password'],
 		)
@@ -75,7 +79,10 @@ def login(request):
 				else:
 					context['error'] = "Incorrect password. Try again."
 		context['error'] = "You are not registered yet."
-
+	else:
+		login_form = LoginForm()
+		context['login_form'] = login_form
+		
 	return render(request, 'home/login.html', context)
 
 
